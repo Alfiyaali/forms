@@ -1,15 +1,29 @@
-let myObj = {
-    name : "Alfiya",
-    email : "alfiyaali177@gmail.com",
-    phone : 7000894121,
-    date : "22/10/1197",
-    time : "10:10"
-};
 
-let myObj_serialized = JSON.stringify(myObj);
-console.log(myObj_serialized);
+function savetToLocalStorage(event){
+    event.preventDefault();
+    
 
-localStorage.setItem("myObj",myObj_serialized);
+    const name = event.target.uname.value;
+    const email = event.target.uemail.value;
+    const phone = event.target.uphone.value;
 
-let myObj_deserialized = JSON.parse(localStorage.getItem("myObj"));
-console.log(myObj_deserialized);
+    const obj = {
+        name,
+        email,
+        phone
+    }
+
+    localStorage.setItem(obj.email, JSON.stringify(obj))
+    showUserOnScreen(obj);
+
+}
+
+function showUserOnScreen(obj){
+    const parentEle = document.getElementById('listofItems');
+    // const childEle = document.createElement('li');
+
+    // childEle.textContent = obj.name +' - '+obj.email+' - '+obj.phone;
+    // parentEle.appendChild(childEle);
+
+    parentEle.innerHTML += `<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
+}
