@@ -23,9 +23,6 @@ function showUserOnScreen(obj){
     const parentEle = document.getElementById('listofItems');
     const childEle = document.createElement('li');
 
-    // childEle.textContent = obj.name +' - '+obj.email+' - '+obj.phone;
-    // parentEle.appendChild(childEle);
-
     childEle.innerHTML += `<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
 
     const deleteButton = document.createElement('input');
@@ -37,6 +34,19 @@ function showUserOnScreen(obj){
         parentEle.removeChild(childEle)
     }
 
+    const editing = document.createElement('input');
+    editing.type = "button"
+    editing.value = "Edit"
+
+    editing.onclick = () =>{
+        localStorage.removeItem(obj.email);
+        parentEle.removeChild(childEle)
+        document.getElementById('unameInputTag').value = obj.name
+        document.getElementById('uemailInputTag').value = obj.email
+        document.getElementById('uphoneInputTag').value = obj.phone
+    }
+
     childEle.appendChild(deleteButton)
+    childEle.appendChild(editing)
     parentEle.appendChild(childEle)
 }
