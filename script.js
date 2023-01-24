@@ -1,3 +1,4 @@
+const { Children } = require("react");
 
 function savetToLocalStorage(event){
     event.preventDefault();
@@ -20,10 +21,22 @@ function savetToLocalStorage(event){
 
 function showUserOnScreen(obj){
     const parentEle = document.getElementById('listofItems');
-    // const childEle = document.createElement('li');
+    const childEle = document.createElement('li');
 
     // childEle.textContent = obj.name +' - '+obj.email+' - '+obj.phone;
     // parentEle.appendChild(childEle);
 
-    parentEle.innerHTML += `<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
+    childEle.innerHTML += `<li>${obj.name} - ${obj.email} - ${obj.phone}</li>`;
+
+    const deleteButton = document.createElement('input');
+    deleteButton.type = "button"
+    deleteButton.value = "Delete"
+
+    deleteButton.onclick = () =>{
+        localStorage.removeItem(obj.email);
+        parentEle.removeChild(childEle)
+    }
+
+    childEle.appendChild(deleteButton)
+    parentEle.appendChild(childEle)
 }
